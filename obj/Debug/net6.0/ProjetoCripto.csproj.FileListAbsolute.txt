@@ -1,0 +1,15 @@
+/home/barrocal/Templates/ProjetoCripto/bin/Debug/net6.0/ProjetoCripto
+/home/barrocal/Templates/ProjetoCripto/bin/Debug/net6.0/ProjetoCripto.deps.json
+/home/barrocal/Templates/ProjetoCripto/bin/Debug/net6.0/ProjetoCripto.runtimeconfig.json
+/home/barrocal/Templates/ProjetoCripto/bin/Debug/net6.0/ProjetoCripto.dll
+/home/barrocal/Templates/ProjetoCripto/bin/Debug/net6.0/ref/ProjetoCripto.dll
+/home/barrocal/Templates/ProjetoCripto/bin/Debug/net6.0/ProjetoCripto.pdb
+/home/barrocal/Templates/ProjetoCripto/obj/Debug/net6.0/ProjetoCripto.csproj.AssemblyReference.cache
+/home/barrocal/Templates/ProjetoCripto/obj/Debug/net6.0/ProjetoCripto.GeneratedMSBuildEditorConfig.editorconfig
+/home/barrocal/Templates/ProjetoCripto/obj/Debug/net6.0/ProjetoCripto.AssemblyInfoInputs.cache
+/home/barrocal/Templates/ProjetoCripto/obj/Debug/net6.0/ProjetoCripto.AssemblyInfo.cs
+/home/barrocal/Templates/ProjetoCripto/obj/Debug/net6.0/ProjetoCripto.csproj.CoreCompileInputs.cache
+/home/barrocal/Templates/ProjetoCripto/obj/Debug/net6.0/ProjetoCripto.dll
+/home/barrocal/Templates/ProjetoCripto/obj/Debug/net6.0/ref/ProjetoCripto.dll
+/home/barrocal/Templates/ProjetoCripto/obj/Debug/net6.0/ProjetoCripto.pdb
+/home/barrocal/Templates/ProjetoCripto/obj/Debug/net6.0/ProjetoCripto.genruntimeconfig.cache
