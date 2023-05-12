@@ -1,202 +1,229 @@
-﻿//OFICIAL
-//Variaveis
-    string Palavra;
-    int Divisao, QuantidadeMatrizes, ComprimentoPalavra;
-    Single Resto;
+﻿/*################################
+============OFICIAL===============
+################################*/
 
-//Entrada
+
+
+/*====================
+-------VARIAVEIS------
+====================*/
+
+
+    string palavra;
+    int divisao, quantidadeMatrizes, comprimentoPalavra;
+    int a,b;
+    Single resto;
+
+
+/*====================
+-------ENTRADA--------
+====================*/
+
+
+
     Console.Write("Digite a palavra a ser criptografada:");
-    Palavra = Console.ReadLine();
+    palavra = Console.ReadLine();
 
-//Processamento
-    //Criação da "Matriz" Palavra:
-    ComprimentoPalavra = Palavra.Length;
-    Resto = (ComprimentoPalavra % 4);
-    Divisao = Convert.ToInt32(ComprimentoPalavra / 4);
 
-    if (Resto != 0)
+/*====================
+----PROCESSAMENTO-----
+====================*/
+
+
+    //Criação da "Matriz" palavra:
+
+
+    comprimentoPalavra = palavra.Length;
+    resto = (comprimentoPalavra % 4);
+    divisao = Convert.ToInt32(comprimentoPalavra / 4);
+
+    if (resto != 0)
     {
         
-        QuantidadeMatrizes = (Divisao +1);
+        quantidadeMatrizes = (divisao +1);
     }
     else
     {
-        QuantidadeMatrizes = Divisao;
+        quantidadeMatrizes = divisao;
     }
 
-    int ComprimentoMatriz = (QuantidadeMatrizes * 4);
+    int comprimentoMatriz = (quantidadeMatrizes * 4);
 
-    char[] VetorPalavra = new char [ComprimentoMatriz];
+    char[] vetorPalavra = new char [comprimentoMatriz];
 
-    //////////////////////////////////
-    //Conversão da Palavra em String para Matriz
-    int a = 0;
-    foreach (char Char in Palavra)
+
+    //Conversão da palavra em String para Matriz
+
+
+    a = 0;
+    foreach (char Char in palavra)
     {
-        VetorPalavra[a] = Palavra[a];
+        vetorPalavra[a] = palavra[a];
         a++;
     }
 
-    ///////////////////////////////////
-    //Preenchimento dos espacos restantes
-    if (ComprimentoPalavra < ComprimentoMatriz)
-    {
-        a = ComprimentoPalavra;
-
-        do
-        {
-             VetorPalavra[a] = '0';
-            a++;
-        } while (a < ComprimentoMatriz);
-    }
     
-    ///////////////////////////////////
-    //Conversão letras para numeros
-    int[] VetorPalavraNumerico = new int [ComprimentoMatriz];
-    string Alfabeto = " '1234567890-=qwertyuiop[asdfghjklç~]zxcvbnm,.;/!@#$%¨&*()_+QWERTYUIOP`{ASDFGHJKLÇ^}|ZXCVBNM<>:?áãâéẽêíĩîóõôúũûÁÃÂÉẼÊÍĨÎÓÕÔÚŨÛ";
+    //Preenchimento dos espacos restantes
 
-    for (a = 0; a < ComprimentoPalavra; a++)
-    {
-        VetorPalavraNumerico[a] = Alfabeto.IndexOf(VetorPalavra[a]);
-    }
 
-    /////////////////////////////////
-    //Criacao do VetorChaveNumerico
-    int[] VetorChaveNumerico = new int [ComprimentoMatriz];
-    a = 0;
-    int b = 0;
+        a = comprimentoPalavra;
+        int acrescimo = 0;
 
-    for (int c = 1; c <= QuantidadeMatrizes; c++)
-    {
-        int SomaDasPosicoes = (VetorPalavraNumerico[a] + VetorPalavraNumerico[(a+1)] + VetorPalavraNumerico[(a+2)] + VetorPalavraNumerico[(a+3)]);
-        a = a+3;
-        do
+        while (a < comprimentoMatriz)
         {
-            VetorChaveNumerico[b] = (VetorPalavraNumerico[b] + SomaDasPosicoes); 
-            b++;
-        } while(b<=a);
-        a++;       
-    }
-
-    /////////////////////////////////
-    //Correcao dos valores de chave que estao acima dos suportados
-
-    for (a = 0; a < ComprimentoMatriz; a++)
-    {
-        while (VetorChaveNumerico[a] > Alfabeto.Length)
-        {
-            VetorChaveNumerico[a] = (VetorChaveNumerico[a] - Alfabeto.Length);
+             vetorPalavra[a] = '0';
+            a++;
+            acrescimo++;
         }
+    
+    
+    //Conversão letras para numeros
 
+
+    int[] vetorPalavraNumerico = new int [comprimentoMatriz];
+    string alfabeto = " '1234567890-=qwertyuiop[asdfghjklç~]zxcvbnm,.;/!@#$%¨&*()_+QWERTYUIOP`{ASDFGHJKLÇ^}|ZXCVBNM<>:?áãâéẽêíĩîóõôúũûÁÃÂÉẼÊÍĨÎÓÕÔÚŨÛ";
+
+    for (a = 0; a < comprimentoPalavra; a++)
+    {
+        vetorPalavraNumerico[a] = alfabeto.IndexOf(vetorPalavra[a]);
     }
 
-    ///////////////////////////////////////////
-    //Criacao do VetorSenhaNumerico / Palavra * Chave
-    int[] VetorSenhaNumerico = new int [ComprimentoMatriz];
+    
+    //Criação do vetorChaveNumerico
+
+            int[] vetorChaveNumerico = new int[comprimentoMatriz];
+            Random aleatorio = new Random();
+            int determinante;
+            b = (alfabeto.Length);
+
+            for(a = 0; a < comprimentoMatriz; a += 4)
+            {
+                do
+                {
+                    vetorChaveNumerico[a] = aleatorio.Next(b);
+                    vetorChaveNumerico[a + 1] = aleatorio.Next(b);
+                    vetorChaveNumerico[a + 2] = aleatorio.Next(b);
+                    vetorChaveNumerico[a + 3] = aleatorio.Next(b);
+                    determinante = (vetorChaveNumerico[a] * vetorChaveNumerico[a + 3]) - (vetorChaveNumerico[a + 1] * vetorChaveNumerico[a + 2]);
+                    Console.WriteLine(vetorChaveNumerico[a]);       
+                } while (determinante != 1 || determinante != -1);
+            }
+    
+    //Criacao do vetorSenhaNumerico / palavra * Chave
+
+
+    int[] vetorSenhaNumerico = new int [comprimentoMatriz];
     a = 0;
-    for (b = 0; b < QuantidadeMatrizes; b++)
+    for (b = 0; b < quantidadeMatrizes; b++)
     {
-        VetorSenhaNumerico[a] = ((VetorPalavraNumerico[a] * VetorChaveNumerico[a]) + (VetorPalavraNumerico[(a+1)] * VetorChaveNumerico[(a+2)]));
-        VetorSenhaNumerico[(a+1)] = ((VetorPalavraNumerico[a] * VetorChaveNumerico[(a+1)]) + (VetorPalavraNumerico[(a+1)] * VetorChaveNumerico[(a+3)]));
-        VetorSenhaNumerico[(a+2)] = ((VetorPalavraNumerico[(a+2)] * VetorChaveNumerico[a]) + (VetorPalavraNumerico[(a+3)] * VetorChaveNumerico[(a+2)]));
-        VetorSenhaNumerico[(a+3)] = ((VetorPalavraNumerico[(a+2)] * VetorChaveNumerico[(a+1)]) + (VetorPalavraNumerico[(a+3)] * VetorChaveNumerico[(a+3)]));
+        vetorSenhaNumerico[a] = ((vetorPalavraNumerico[a] * vetorChaveNumerico[a]) + (vetorPalavraNumerico[(a+1)] * vetorChaveNumerico[(a+2)]));
+        vetorSenhaNumerico[(a+1)] = ((vetorPalavraNumerico[a] * vetorChaveNumerico[(a+1)]) + (vetorPalavraNumerico[(a+1)] * vetorChaveNumerico[(a+3)]));
+        vetorSenhaNumerico[(a+2)] = ((vetorPalavraNumerico[(a+2)] * vetorChaveNumerico[a]) + (vetorPalavraNumerico[(a+3)] * vetorChaveNumerico[(a+2)]));
+        vetorSenhaNumerico[(a+3)] = ((vetorPalavraNumerico[(a+2)] * vetorChaveNumerico[(a+1)]) + (vetorPalavraNumerico[(a+3)] * vetorChaveNumerico[(a+3)]));
         a = a + 4;
     }
 
-    ////////////////////////////////////////
+    
     //Correcao dos valores de senha que estao acima dos suportados
 
-    for (a = 0; a < ComprimentoMatriz; a++)
+
+    for (a = 0; a < comprimentoMatriz; a++)
     {
-        while (VetorSenhaNumerico[a] > Alfabeto.Length)
+        while (vetorSenhaNumerico[a] >= alfabeto.Length)
         {
-            VetorSenhaNumerico[a] = (VetorSenhaNumerico[a] - Alfabeto.Length);
+            vetorSenhaNumerico[a] = (vetorSenhaNumerico[a] - alfabeto.Length);
         }
 
     }
 
-    ///////////////////////////////////////////
-    //Criacao dos VetorChave e VetorSenha
+    
+    //Criacao dos vetorChave e vetorSenha
 
-    char[] VetorChave = new char [ComprimentoMatriz];
-    char[] VetorSenha = new char [ComprimentoMatriz];
-    a = 0;
 
-    foreach (int Numero in VetorChaveNumerico)
+    char[] vetorChave = new char [comprimentoMatriz];
+    char[] vetorSenha = new char [(comprimentoMatriz + 1)];
+
+    for (a = 0; a < comprimentoMatriz; ++a)
     {
-        VetorChave[a] = Alfabeto[VetorChaveNumerico[a]];
-        a++;
-    }
+        vetorChave[a] = alfabeto[vetorChaveNumerico[a]];
 
-    a = 0;
-    foreach (int Numero in VetorSenhaNumerico)
-    {
-        VetorSenha[a] = Alfabeto[VetorSenhaNumerico[a]];
-        a++;
+        vetorSenha[a] = alfabeto[vetorSenhaNumerico[a]];
     }
     
+    vetorSenha[comprimentoMatriz] = Convert.ToChar(acrescimo);
+
+
+    //Substituição de ' ' por '¶'
+
+    a = 0;
+    foreach (char elementoChar in vetorChave)
+    {
+        if (Convert.ToBoolean(vetorSenha[a] = ' '))
+        {
+            vetorSenha[a] = '¶';
+        }
+
+        if (Convert.ToBoolean(vetorChave[a] = ' '))
+        {
+            vetorChave[a] = '¶';
+        }
+        a++;
+    }
 
 
 
+/*====================
+--------TESTES--------
+====================*/
 
 
-
-
-
-    /////////////////////////////////
-    //teste
     int z = 0;
-    foreach (int num in VetorPalavraNumerico)
+    foreach (int num in vetorPalavraNumerico)
     {
 
-        Console.Write($"{VetorPalavraNumerico[z]} ");
+        Console.Write($"{vetorPalavraNumerico[z]} ");
         z++;
     }
     
     Console.WriteLine();
 
     z = 0;
-    foreach (int num in VetorChaveNumerico)
+    foreach (int num in vetorChaveNumerico)
     {
 
-        Console.Write($"{VetorChaveNumerico[z]} ");
+        Console.Write($"{vetorChaveNumerico[z]} ");
         z++;
     }
-    Console.WriteLine($"\n {ComprimentoMatriz}");
+    Console.WriteLine($"\n {comprimentoMatriz}");
 
     Console.WriteLine();
 
     z = 0;
-    foreach (int num in VetorSenhaNumerico)
+    foreach (int num in vetorSenhaNumerico)
     {
 
-        Console.Write($"{VetorSenhaNumerico[z]} ");
+        Console.Write($"{vetorSenhaNumerico[z]} ");
         z++;
     }
 
     Console.WriteLine();
     Console.Write("Sua Chave é: ");
     z = 0;
-    foreach (char letra in VetorChave)
+    foreach (char letra in vetorChave)
     {
 
-        Console.Write($"{VetorChave[z]} ");
+        Console.Write($"{vetorChave[z]} ");
         z++;
     }
 
     Console.WriteLine();
     Console.Write("Sua Senha é: ");
     z = 0;
-    foreach (char letra in VetorSenha)
+    foreach (char letra in vetorSenha)
     {
 
-        Console.Write($"{VetorSenha[z]} ");
+        Console.Write($"{vetorSenha[z]} ");
         z++;
     }
 
     Console.ReadKey();
-    
-
-
-//Saida
-
